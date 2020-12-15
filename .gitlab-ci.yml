@@ -1,0 +1,17 @@
+image: maven:3.6.3-openjdk-11
+
+variables:
+  MAVEN_OPTS: "-Dhttp.proxyHost=www-cache.inf.h-brs.de -Dhttps.proxyHost=www-cache.inf.h-brs.de -Dhttp.proxyPort=8080 -Dhttps.proxyPort=8080"
+
+stages:
+  - BuildAndTest-Step
+  - Analyse-Step
+
+build-and-test:
+  stage: BuildAndTest-Step
+  script: "cd todolistmanager && mvn -Dheadless=true install -B && cat target/site/jacoco/index.html"
+  
+sonar-analysis:
+  stage: Analyse-Step
+  script: "cd todolistmanager && mvn -Dheadless=true test sonar:sonar -B"
+  
