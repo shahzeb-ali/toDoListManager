@@ -1,7 +1,7 @@
 package de.hbrs.todolistmanager.model;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Schreiben und Lesen von Daten in das Dateisystem
  */
-public class DataIntegration implements ListChangeListener<TodoItem> {
+public class DataIntegration implements ListChangeListener<LatestFinishDateTodoItem> {
 
     private static final Logger logger = LogManager.getLogger(DataIntegration.class);
 
@@ -29,7 +29,7 @@ public class DataIntegration implements ListChangeListener<TodoItem> {
      *
      * @param data Die Liste, in welcher die Daten abgelegt werden sollen.
      */
-    public void readData(ObservableList<TodoItem> data) {
+    public void readData(ObservableList<LatestFinishDateTodoItem> data) {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             String xml = inputStreamToString(new FileInputStream(fileName));
@@ -63,11 +63,11 @@ public class DataIntegration implements ListChangeListener<TodoItem> {
      * Der Listener sorgt dafür, dass Änderungen direkt in das Dateisystem geschrieben werden.
      */
     @Override
-    public void onChanged(Change<? extends TodoItem> c) {
+    public void onChanged(Change<? extends LatestFinishDateTodoItem> c) {
         List<PersistentTodoItem> list = new ArrayList<>();
 
-        ObservableList<? extends TodoItem> newList = c.getList();
-        for (TodoItem todoItem : newList) {
+        ObservableList<? extends LatestFinishDateTodoItem> newList = c.getList();
+        for (LatestFinishDateTodoItem todoItem : newList) {
             list.add(new PersistentTodoItem(todoItem));
         }
 

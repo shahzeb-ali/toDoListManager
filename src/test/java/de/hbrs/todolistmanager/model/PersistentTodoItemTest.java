@@ -1,7 +1,7 @@
 package de.hbrs.todolistmanager.model;
 
 
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -15,11 +15,11 @@ class PersistentTodoItemTest {
 	@Test
 	void testSettingAndGetting () {
 		
-		TodoItem todoItem = new TodoItem(TESTISSUE,LocalDate.now());
+		LatestFinishDateTodoItem todoItem = new LatestFinishDateTodoItem(TESTISSUE,LocalDate.now());
 		
 		PersistentTodoItem persistentTodoItem = new PersistentTodoItem(todoItem);
 		
-		TodoItem todoItem2 = persistentTodoItem.createTodoItem();
+		LatestFinishDateTodoItem todoItem2 = persistentTodoItem.createTodoItem();
 
 		assertEquals(todoItem, todoItem2);
 	}
@@ -27,11 +27,11 @@ class PersistentTodoItemTest {
 	@Test
 	void testSettingAndGettingWithNullTime () {
 		
-		TodoItem todoItem = new TodoItem(TESTISSUE,null);
+		LatestFinishDateTodoItem todoItem = new LatestFinishDateTodoItem(TESTISSUE,null);
 		
 		PersistentTodoItem persistentTodoItem = new PersistentTodoItem(todoItem);
 		
-		TodoItem todoItem2 = persistentTodoItem.createTodoItem();
+		LatestFinishDateTodoItem todoItem2 = persistentTodoItem.createTodoItem();
 
 		assertEquals(todoItem, todoItem2);
 

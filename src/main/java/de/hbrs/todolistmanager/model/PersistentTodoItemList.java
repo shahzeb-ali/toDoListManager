@@ -9,19 +9,31 @@ import java.util.List;
 /**
  * Hält die Liste der Items, die gespeichert werden.
  */
-@JacksonXmlRootElement(localName = "list")
+@JacksonXmlRootElement(localName = "lists")
 public class PersistentTodoItemList {
 
-    @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "todo")
-    public List<PersistentTodoItem> persistentTodoItems;
+    @JacksonXmlElementWrapper(localName = "finishDate", useWrapping = true)
+    @JacksonXmlProperty(localName = "latestFinishDateTodoItem")
+    public List<LatestFinishDatePersistentTodoItem> latestFinishDatePersistentTodoItems;
 
-    public List<PersistentTodoItem> getPersistentTodoItems() {
-        return persistentTodoItems;
+    @JacksonXmlElementWrapper(localName = "priority", useWrapping = true)
+    @JacksonXmlProperty(localName = "priorityTodoItem")
+    public List<PriorityPersistentTodoItem> priorityPersistentTodoItems;
+
+
+    public List<LatestFinishDatePersistentTodoItem> getLatestFinishDatePersistentTodoItems() {
+        return latestFinishDatePersistentTodoItems;
     }
 
-    public void setPersistentTodoItems(List<PersistentTodoItem> persistentTodoItems) {
-        this.persistentTodoItems = persistentTodoItems;
+    public void setLatestFinishDatePersistentTodoItems(List<LatestFinishDatePersistentTodoItem> todoItems) {
+        this.latestFinishDatePersistentTodoItems = todoItems;
     }
 
+    public List<PriorityPersistentTodoItem> getPriorityPersistentTodoItems() {
+        return priorityPersistentTodoItems;
+    }
+
+    public void setPriorityPersistentTodoItems(List<PriorityPersistentTodoItem> todoItems) {
+        this.priorityPersistentTodoItems = todoItems;
+    }
 }

@@ -1,6 +1,6 @@
 package de.hbrs.todolistmanager.controller;
 
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
@@ -16,12 +16,12 @@ public class ResizingListener implements ChangeListener<Bounds> {
 	public static final int SPACE_BETWEEN_TWO_COLUMNS = 22;
 	public static final int PREFERRED_SIZE_OF_LATEST_FINISH_DATE_COLUMN = 180;
 	
-	private TableView<TodoItem> tableView;
-	private TableColumn<TodoItem, String> issueTableColumn;
-	private TableColumn<TodoItem, String> latestFinishDateTableColumn;
+	private TableView<LatestFinishDateTodoItem> tableView;
+	private TableColumn<LatestFinishDateTodoItem, String> issueTableColumn;
+	private TableColumn<LatestFinishDateTodoItem, String> latestFinishDateTableColumn;
 	
-	public ResizingListener(TableView<TodoItem> tableView, 
-			TableColumn<TodoItem, String> issueTableColumn, TableColumn<TodoItem, String> latestFinishDateTableColumn) {
+	public ResizingListener(TableView<LatestFinishDateTodoItem> tableView, 
+			TableColumn<LatestFinishDateTodoItem, String> issueTableColumn, TableColumn<LatestFinishDateTodoItem, String> latestFinishDateTableColumn) {
 		this.tableView = tableView;
 		this.issueTableColumn = issueTableColumn;
 		this.latestFinishDateTableColumn = latestFinishDateTableColumn;

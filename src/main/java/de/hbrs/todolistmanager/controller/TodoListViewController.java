@@ -1,7 +1,7 @@
 package de.hbrs.todolistmanager.controller;
 
 import de.hbrs.todolistmanager.model.DataIntegration;
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,13 +28,13 @@ public class TodoListViewController {
     private GridPane rootGridPane;
 
     @FXML
-    private TableView<TodoItem> tableView;
+    private TableView<LatestFinishDateTodoItem> tableView;
 
     @FXML
-    private TableColumn<TodoItem, String> issueTableColumn;
+    private TableColumn<LatestFinishDateTodoItem, String> issueTableColumn;
 
     @FXML
-    private TableColumn<TodoItem, String> latestFinishDateTableColumn;
+    private TableColumn<LatestFinishDateTodoItem, String> latestFinishDateTableColumn;
 
     @FXML
     private TextField issueTextField;
@@ -52,7 +52,7 @@ public class TodoListViewController {
 
         issueTableColumn.setOnEditCommit(event -> {
 
-            TodoItem todoItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            LatestFinishDateTodoItem todoItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
 
             // Enfernen und neues Hinzufügen, damit die Listener der Liste benachrichtigt werden.
             int position = event.getTablePosition().getRow();
@@ -66,7 +66,7 @@ public class TodoListViewController {
         issueTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         latestFinishDateTableColumn.setOnEditCommit(event -> {
-               TodoItem todoItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
+               LatestFinishDateTodoItem todoItem = event.getTableView().getItems().get(event.getTablePosition().getRow());
                LocalDate latestFinishDate = todoItem.getLatestFinishDate();
 
                try {
@@ -87,7 +87,7 @@ public class TodoListViewController {
         latestFinishDateTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         
-        ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+        ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
         DataIntegration dataIntegration = new DataIntegration();
         dataIntegration.readData(data);
         data.addListener(dataIntegration);
@@ -98,11 +98,11 @@ public class TodoListViewController {
     public void addTodoItem() {
         if (issueTextField.getText() != null && !issueTextField.getText().isEmpty()
                 && latestFinishDateDatePicker.getValue() != null) {
-            TodoItem item = new TodoItem();
+            LatestFinishDateTodoItem item = new LatestFinishDateTodoItem();
             item.setIssue(issueTextField.getText());
             item.setLatestFinishDate(latestFinishDateDatePicker.getValue());
 
-            ObservableList<TodoItem> data = tableView.getItems();
+            ObservableList<LatestFinishDateTodoItem> data = tableView.getItems();
             data.add(item);
 
             issueTextField.clear();
@@ -111,7 +111,7 @@ public class TodoListViewController {
     }
 
     public void delete() {
-        TodoItem item = tableView.getSelectionModel().getSelectedItem();
+        LatestFinishDateTodoItem item = tableView.getSelectionModel().getSelectedItem();
         tableView.getItems().remove(item);
     }
     

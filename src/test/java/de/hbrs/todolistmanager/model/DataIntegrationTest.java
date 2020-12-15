@@ -1,6 +1,6 @@
 package de.hbrs.todolistmanager.model;
 
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
@@ -26,18 +26,18 @@ class DataIntegrationTest {
 	@Test
 	void writeAndReadEmptyList() {
 
-		ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		
 		DataIntegration dataIntegration = new DataIntegration();
 		dataIntegration.fileName = TODOLIST_IT_EMPTY_XML;
 		data.addListener(dataIntegration);
 		
-		data.add(new TodoItem(ISSUE1, LocalDate.now()));
+		data.add(new LatestFinishDateTodoItem(ISSUE1, LocalDate.now()));
 		data.remove(0);
 								
 		DataIntegration readDataIntegration = new DataIntegration();
 		readDataIntegration.fileName = TODOLIST_IT_EMPTY_XML;
-		ObservableList<TodoItem> data2 = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data2 = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegration.readData(data2);
 				
 		assertEquals(data2.size(), data.size());
@@ -46,23 +46,23 @@ class DataIntegrationTest {
 	@Test
 	void writeAndReadList() {
 
-		ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		
 		DataIntegration dataIntegration = new DataIntegration();
 		dataIntegration.fileName = TODOLIST_IT_XML;
 		data.addListener(dataIntegration);
 		
-		data.add(new TodoItem(ISSUE1, LocalDate.now()));
-		data.add(new TodoItem(ISSUE2, LocalDate.now()));
+		data.add(new LatestFinishDateTodoItem(ISSUE1, LocalDate.now()));
+		data.add(new LatestFinishDateTodoItem(ISSUE2, LocalDate.now()));
 						
 		DataIntegration readDataIntegration = new DataIntegration();
 		readDataIntegration.fileName = TODOLIST_IT_XML;
-		ObservableList<TodoItem> data2 = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data2 = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegration.readData(data2);
 				
 		assertEquals(data2.size(), data.size());
 		
-		for (TodoItem item : data) {
+		for (LatestFinishDateTodoItem item : data) {
 			assertTrue(data2.contains(item));
 		}
 
@@ -72,7 +72,7 @@ class DataIntegrationTest {
 	void missingFile() {
 		DataIntegration readDataIntegration = new DataIntegration();
 		readDataIntegration.fileName = TODOLIST_IT_MISSING_XML;
-		ObservableList<TodoItem> data2 = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data2 = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegration.readData(data2);
 
 		assertEquals(0, data2.size());
@@ -81,13 +81,13 @@ class DataIntegrationTest {
 	@Test
 	void brokenFilename() {
 
-		ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 
 		DataIntegration dataIntegration = new DataIntegration();
 		dataIntegration.fileName = TODOLIST_IT_BROKEN_FILENAME;
 		data.addListener(dataIntegration);
 
-		data.add(new TodoItem(ISSUE1, LocalDate.now()));
+		data.add(new LatestFinishDateTodoItem(ISSUE1, LocalDate.now()));
 
 		assertEquals(1, data.size());
 
@@ -99,17 +99,17 @@ class DataIntegrationTest {
 
 		// Hinzufügen
 		
-		ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		
 		DataIntegration dataIntegration = new DataIntegration();
 		dataIntegration.fileName = TODOLIST_IT_XML;
 		data.addListener(dataIntegration);
 		
-		data.add(new TodoItem(ISSUE1, LocalDate.now()));
+		data.add(new LatestFinishDateTodoItem(ISSUE1, LocalDate.now()));
 		
 		DataIntegration readDataIntegration = new DataIntegration();
 		readDataIntegration.fileName = TODOLIST_IT_XML;
-		ObservableList<TodoItem> data2 = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data2 = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegration.readData(data2);
 				
 		assertEquals(1, data2.size());
@@ -122,7 +122,7 @@ class DataIntegrationTest {
 		
 		DataIntegration readDataIntegrationDelete = new DataIntegration();
 		readDataIntegrationDelete.fileName = TODOLIST_IT_XML;
-		ObservableList<TodoItem> dataDelete = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> dataDelete = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegrationDelete.readData(dataDelete);
 				
 		assertEquals(0, dataDelete.size());
@@ -132,13 +132,13 @@ class DataIntegrationTest {
 	@Test
 	void changeItem() {
 		
-		ObservableList<TodoItem> data = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		
 		DataIntegration dataIntegration = new DataIntegration();
 		dataIntegration.fileName = TODOLIST_IT_XML;
 		data.addListener(dataIntegration);
 		
-		TodoItem todoItem = new TodoItem(ISSUE1, LocalDate.now());
+		LatestFinishDateTodoItem todoItem = new LatestFinishDateTodoItem(ISSUE1, LocalDate.now());
 		
 		data.add(todoItem);
 		
@@ -151,7 +151,7 @@ class DataIntegrationTest {
 		
 		DataIntegration readDataIntegration = new DataIntegration();
 		readDataIntegration.fileName = TODOLIST_IT_XML;
-		ObservableList<TodoItem> data2 = FXCollections.observableArrayList(new ArrayList<TodoItem>());
+		ObservableList<LatestFinishDateTodoItem> data2 = FXCollections.observableArrayList(new ArrayList<LatestFinishDateTodoItem>());
 		readDataIntegration.readData(data2);
 				
 		assertEquals(1, data2.size());

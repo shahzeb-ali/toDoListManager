@@ -1,6 +1,6 @@
 package de.hbrs.todolistmanager.model;
 
-import de.hbrs.todolistmanager.model.view.TodoItem;
+import de.hbrs.todolistmanager.model.view.LatestFinishDateTodoItem;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -19,7 +19,7 @@ public class PersistentTodoItem {
 	 * Konvertierung von View-Item in persistentes Item
 	 * @param item das Item aus dem View
 	 */
-	public PersistentTodoItem(TodoItem item) {
+	public PersistentTodoItem(LatestFinishDateTodoItem item) {
 		this.issue = item.getIssue();
 		if (item.getLatestFinishDate() != null) {
 			this.latestFinishDate = Date.from(item.getLatestFinishDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -39,10 +39,10 @@ public class PersistentTodoItem {
 	 * Konvertierung von persistentem Item in View-Item
 	 * @return das Item für den View
 	 */
-	public TodoItem createTodoItem() {
+	public LatestFinishDateTodoItem createTodoItem() {
 		LocalDate localDate = this.latestFinishDate != null
 				? this.latestFinishDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-		return new TodoItem(this.issue, localDate);
+		return new LatestFinishDateTodoItem(this.issue, localDate);
 	}
 
 	public String getIssue() {
